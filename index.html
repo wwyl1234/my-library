@@ -8,13 +8,35 @@
 
         <!-- TODO: Add SDKs for Firebase products that you want to use
         https://firebase.google.com/docs/web/setup#available-libraries -->
-        <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-analytics.js"></script>
-
+        <!-- Add Firebase products that you want to use -->
+        <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-database.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="scripts/main.js"></script>
         <title>My library</title>
     </head>
 
     <body>
-          <p>Welcome to my library!</p>
+        <h1>Welcome to my library!</h1>
+        <p>I have a tendency to purchase books and not read them. 
+            I hope this app will encourage me to read those books and to organize my books.</p>
+        <div id="tableContainer">    
+            <table id="booksTable" class="table">
+                <!--     
+                <tr>
+                  <th onclick="w3.sortHTML('#usersTable', '.item', 'td:nth-child(1)')">Name</th>
+                  <th onclick="w3.sortHTML('#usersTable', '.item', 'td:nth-child(2)')">Address</th>
+                  <th onclick="w3.sortHTML('#usersTable', '.item', 'td:nth-child(3)')">Sales Person</th>
+                </tr> 
+                -->
+                <tr>
+                  <th>Name</th>
+                  <th>Author</th>
+                  <th>Location</th>
+                  <th>Borrowed?</th>
+                </tr>
+            </table>
+        </div>      
     </body>
 </html>

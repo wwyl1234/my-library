@@ -12,7 +12,27 @@ const FIREBASECONFIG = {
 
 // Initialize Firebase
 firebase.initializeApp(FIREBASECONFIG);
-firebase.analytics();
+// Get a database reference to our posts
+var db = firebase.database();
+var ref = db.ref("books");
+ref.on("value", function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+     var childData = childSnapshot.val();
+     var id=childData.id;
+     console.log(childData);
+     // get if from the table Element
+     let tableData = `<tr>
+     <th>${childData.name}</th>
+     <th>${childData.author}</th>
+     <th>${childData.location}</th>
+     <th>${childData.borrowed}</th>
+   </tr>`
+     $("#booksTable").append(tableData);
+     // load data into table;
+
+    });
+   });
+
 
 
 
@@ -35,5 +55,9 @@ firebase.auth().signInWithPopup(provider).then(function(result) {
     // ...
   });
   
-  let database = firebase.database();
-  console.log(database);
+
+
+
+  
+//console.log(db);
+//console.log(ref);

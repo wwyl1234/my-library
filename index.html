@@ -2,6 +2,15 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+
         <link rel="stylesheet" href="css/main.css">
         <!-- The core Firebase JS SDK is always required and must be listed first -->
         <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-app.js"></script>
@@ -12,31 +21,39 @@
         <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-auth.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-firestore.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-database.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="scripts/main.js"></script>
         <title>My library</title>
     </head>
 
     <body>
-        <h1>Welcome to my library!</h1>
-        <p>I have a tendency to purchase books and not read them. 
-            I hope this app will encourage me to read those books and to organize my books.</p>
-        <div id="tableContainer">    
-            <table id="booksTable" class="table">
-                <!--     
-                <tr>
-                  <th onclick="w3.sortHTML('#usersTable', '.item', 'td:nth-child(1)')">Name</th>
-                  <th onclick="w3.sortHTML('#usersTable', '.item', 'td:nth-child(2)')">Address</th>
-                  <th onclick="w3.sortHTML('#usersTable', '.item', 'td:nth-child(3)')">Sales Person</th>
-                </tr> 
-                -->
-                <tr>
-                  <th>Name</th>
-                  <th>Author</th>
-                  <th>Location</th>
-                  <th>Borrowed?</th>
-                </tr>
-            </table>
-        </div>      
+        <div id="mainContainer" class=container>
+            <div id="topContainer" class=container>
+                <h1>Welcome to my library!</h1>
+            </div>
+            <div id="midContainer" class=container>
+                <p>I have a tendency to purchase books and not read them. 
+                    I hope this app will encourage me to read those books and to organize my books.</p>
+            </div>
+            <div id="bottomContainer" class=container>
+                <div id="tableContainer" class="table-responsive">    
+                    <table id="booksTable" class="table-bordered">
+                        <thead>
+                            <tr>
+                                <th data-field="name">Name</th>
+                                <th data-field="author">Author</th>
+                                <th data-field="location">Location</th>
+                                <th data-field="borrowed">Borrowed?</th>
+                                <th data-field="isbn">ISBN</th>
+                            </tr>
+                        </thead>
+                        <tbody id="booksData">
+
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
+                </div>  
+            </div>   
+        </div> 
     </body>
 </html>

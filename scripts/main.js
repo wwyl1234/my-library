@@ -10,31 +10,50 @@ const FIREBASECONFIG = {
     measurementId: "G-21398Y6TTY"
   };
 
+$(document).ready(function() {
+    // Data from https://my-library-bd9da.firebaseio.com/books/.json is an array of objects.
+    $('#booksTable').DataTable( {
+        "ajax": {
+            "url": 'https://my-library-bd9da.firebaseio.com/books/.json',
+            "method": "GET",
+            "dataSrc": ""
+            },
+        "columns": [
+            { data : "name" },
+            { data : "author" },
+            { data : "location" },
+            { data : "borrowed" },
+            { data : "isbn" }
+        ]
+    } );
+});
+
+
 // Initialize Firebase
 firebase.initializeApp(FIREBASECONFIG);
-// Get a database reference to our posts
-var db = firebase.database();
-var ref = db.ref("books");
-ref.on("value", function(snapshot) {
-    snapshot.forEach(function(childSnapshot) {
-     var childData = childSnapshot.val();
-     var id=childData.id;
-     console.log(childData);
-     // get if from the table Element
-     let tableData = `<tr>
-     <th>${childData.name}</th>
-     <th>${childData.author}</th>
-     <th>${childData.location}</th>
-     <th>${childData.borrowed}</th>
-   </tr>`
-     $("#booksTable").append(tableData);
-     // load data into table;
 
+function loadFirebaseDatabase(){
+    // Might need to get rid of this as datatable works well with ajax call
+    var db = firebase.database();
+    var ref = db.ref("books");
+    ref.on("value", function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+        var childData = childSnapshot.val();
+        var id=childData.id;
+        console.log(childData);
+        // get if from the table Element
+        let tableData = `<tr>
+        <td>${childData.name}</td>
+        <td>${childData.author}</td>
+        <td>${childData.location}</td>
+        <td>${childData.borrowed}</td>
+        </tr>`
+        // load data into table;
+        console.log("appended data");
+        $("#booksData").append(tableData);
+        });
     });
-   });
-
-
-
+}
 
 var provider = new firebase.auth.GithubAuthProvider();
 
@@ -55,9 +74,3 @@ firebase.auth().signInWithPopup(provider).then(function(result) {
     // ...
   });
   
-
-
-
-  
-//console.log(db);
-//console.log(ref);

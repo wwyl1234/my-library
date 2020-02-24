@@ -1,0 +1,32 @@
+
+
+#mainContainer {
+    /* Using the Laughing Orange Colour. */
+    background-color: #ffa70f ;
+}
+
+#topContainer{
+    padding: 2em;
+    /* Using the Laughing Orange Colour. */
+    background-color: #ffa70f ;
+}
+
+#midContainer{
+    padding: 2em;
+    /* Using the Laughing Orange Colour. */
+    background-color: #ffa70f ;
+}
+
+#bottomContainer{
+    padding: 2em;
+    /* Using the Laughing Orange Colour. */
+    background-color: #ffa70f ;
+}
+
+.tr{
+    text-align: left;
+}
+
+.td{
+    text-align: left;
+}

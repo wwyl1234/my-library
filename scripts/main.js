@@ -10,6 +10,9 @@ const FIREBASECONFIG = {
     measurementId: "G-21398Y6TTY"
   };
 
+// Initialize Firebase once
+firebase.initializeApp(FIREBASECONFIG);
+
 $(document).ready(function() {
     // Data from https://my-library-bd9da.firebaseio.com/books/.json is an array of objects.
     $('#booksTable').DataTable( {
@@ -26,11 +29,62 @@ $(document).ready(function() {
             { data : "isbn" }
         ]
     } );
+    
+    $(function(){
+        $('#addBookForm').on('submit', function(e){
+          e.preventDefault();
+          let postData = getAddBookData();
+          console.log(postData);
+          // need to ajax post to database
+          $.ajax({
+            url: 'https://my-library-bd9da.firebaseio.com/books/.json',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(postData),
+            });
+        });
+    });
+
 });
 
+// Returns a json of a book to be added to the database
+function getAddBookData(){
+    let name = $('#name').val();
+    let author = $('#author').val();
+    let location = $('#location').val()
+    let borrowed = null;
+    let isbn = $('#isbn').val();
 
-// Initialize Firebase
-firebase.initializeApp(FIREBASECONFIG);
+    if ($('#borrowedSetTrue').is(':checked'))
+    {
+        borrowed = true;
+    }
+
+    if ($('#borrowedSetFalse').is(':checked')){
+        borrowed = false;
+    }
+
+    if (borrowed == null){
+        return {};
+    }
+
+    return { 
+        "name" : `${name}`,
+        "author" : `${author}`,
+        "location" : `${location}`,
+        "borrowed" : `${borrowed}`,
+        "isbn" : `${isbn}`,
+    }
+
+}
+
+function addBookHandler(){
+    console.log("test");
+    signIn();
+}
+
+function signIn(){
+
 
 function loadFirebaseDatabase(){
     // Might need to get rid of this as datatable works well with ajax call
@@ -62,7 +116,9 @@ firebase.auth().signInWithPopup(provider).then(function(result) {
     var token = result.credential.accessToken;
     // The signed-in user info.
     var user = result.user;
-    // ...
+    // load the pop-up form
+
+
   }).catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
@@ -73,4 +129,5 @@ firebase.auth().signInWithPopup(provider).then(function(result) {
     var credential = error.credential;
     // ...
   });
-  
+}
+

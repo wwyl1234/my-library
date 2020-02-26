@@ -10,6 +10,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
+        <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/ui-darkness/jquery-ui.css" rel="stylesheet">
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
 
         <link rel="stylesheet" href="css/main.css">
         <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -28,6 +30,19 @@
     <body>
         <div id="mainContainer" class=container>
             <div id="topContainer" class=container>
+                <nav id="menu" class="navbar navbar-inverse">
+                    <div class="container-fluid">
+                      <div class="navbar-header">
+                        <a class="navbar-brand" href="#">MyLibrary</a>
+                      </div>
+                      <ul class="nav navbar-nav">
+                        <!--- <li class="active"><a href="#">Home</a></li> -->
+                      </ul>
+                      <!---  maybe should disable this button until user logged in??? -->
+                      <button id="addBookButton" type="button" class="btn btn-info btn-lg navbar-btn" data-toggle="modal" data-target="#addBookModal" onclick="addBookHandler()">Add Book</button>
+                      
+                    </div>
+                  </nav> 
                 <h1>Welcome to my library!</h1>
             </div>
             <div id="midContainer" class=container>
@@ -53,6 +68,45 @@
                         </tfoot>
                     </table>
                 </div>  
+            
+            <!-- Modal to add book -->
+            <div id="addBookModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add book</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    
+                </div>
+                <div class="modal-body">
+                    <form id="addBookForm" method="post">
+                        <label for="name">Name:</label><br>
+                        <input type="text" id="name" name="name"><br>
+                        <label for="author">Author:</label><br>
+                        <input type="text" id="author" name="author"><br>
+                        <label for="location">Location:</label><br>
+                        <input type="text" id="location" name="location" placeholder="MP"><br>
+                        <!-- Get borrowed info using radio buttons  -->
+                        <label for="borrowed">Is it Borrowed?</label><br>
+                        <input type="radio" id="borrowedSetTrue" name="borrowed" value="true">
+                        <label for="borrowedSetTrue">Yes</label>
+                        <input type="radio" id="borrowedSetFalse" name="borrowed" value="false">
+                        <label for="borrowedSetFalse">No</label> <br>
+
+                        <label for="isbn">ISBN13:</label><br>
+                        <input type="text" id="isbn" name="isbn"><br><br>
+                        <input type="submit">    
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+                </div>
+
+            </div>
+            </div>
             </div>   
         </div> 
     </body>

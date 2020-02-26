@@ -23,10 +23,14 @@
     background-color: #ffa70f ;
 }
 
-.tr{
+.tr {
     text-align: left;
 }
 
-.td{
+.td {
     text-align: left;
+}
+
+#menu {
+    background-color: #000000;
 }

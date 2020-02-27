@@ -1,26 +1,25 @@
 
 
 #mainContainer {
-    /* Using the Laughing Orange Colour. */
-    background-color: #ffa70f ;
+    background-color: #ffffff ;
 }
 
 #topContainer{
     padding: 2em;
-    /* Using the Laughing Orange Colour. */
-    background-color: #ffa70f ;
+    background-color: #ffffff ;
 }
 
 #midContainer{
     padding: 2em;
-    /* Using the Laughing Orange Colour. */
-    background-color: #ffa70f ;
+    background-color: #ffffff ;
 }
 
 #bottomContainer{
     padding: 2em;
-    /* Using the Laughing Orange Colour. */
-    background-color: #ffa70f ;
+    background-color: #ffffff ;
+    border-style: solid;
+    border-width: 1em;
+    border-color: #f49807;
 }
 
 .tr {
@@ -32,5 +31,13 @@
 }
 
 #menu {
+    background-color: #f49807 ;
+}
+
+#addBookButton {
     background-color: #000000;
+}
+
+.navbar-brand {
+    color: #140d00 ;
 }

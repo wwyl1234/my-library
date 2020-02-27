@@ -29,20 +29,21 @@
 
     <body>
         <div id="mainContainer" class=container>
+            <nav id="menu" class="navbar navbar-inverse">
+                <div class="container-fluid">
+                  <div class="navbar-header">
+                    <a class="navbar-brand">MyLibrary</a>
+                  </div>
+                  <ul class="nav navbar-nav">
+                    <!--- <li class="active"><a href="#">Home</a></li> -->
+                  </ul>
+                  <!---  maybe should disable this button until user logged in??? -->
+                  <button id="addBookButton" type="button" class="btn btn-info btn-lg navbar-btn" data-toggle="modal" data-target="#addBookModal" onclick="addBookHandler()">Add Book</button>
+                  
+                </div>
+              </nav> 
             <div id="topContainer" class=container>
-                <nav id="menu" class="navbar navbar-inverse">
-                    <div class="container-fluid">
-                      <div class="navbar-header">
-                        <a class="navbar-brand" href="#">MyLibrary</a>
-                      </div>
-                      <ul class="nav navbar-nav">
-                        <!--- <li class="active"><a href="#">Home</a></li> -->
-                      </ul>
-                      <!---  maybe should disable this button until user logged in??? -->
-                      <button id="addBookButton" type="button" class="btn btn-info btn-lg navbar-btn" data-toggle="modal" data-target="#addBookModal" onclick="addBookHandler()">Add Book</button>
-                      
-                    </div>
-                  </nav> 
+                
                 <h1>Welcome to my library!</h1>
             </div>
             <div id="midContainer" class=container>

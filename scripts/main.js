@@ -14,6 +14,8 @@ const FIREBASECONFIG = {
 firebase.initializeApp(FIREBASECONFIG);
 
 $(document).ready(function() {
+
+    // Load datatabase into table.
     // Data from https://my-library-bd9da.firebaseio.com/books/.json is an array of objects.
     $('#booksTable').DataTable( {
         "ajax": {
@@ -30,24 +32,27 @@ $(document).ready(function() {
         ]
     } );
     
+    // Add book to database, when user click submit button on the form.
     $(function(){
         $('#addBookForm').on('submit', function(e){
           e.preventDefault();
           let postData = getAddBookData();
           console.log(postData);
-          // need to ajax post to database
-          $.ajax({
-            url: 'https://my-library-bd9da.firebaseio.com/books/.json',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(postData),
-            });
+          addBookToDatabase(postData);
+          
+          // need to reload table with a timeout of 2 minutes
+          let reload = $('#booksTable').DataTable().ajax.reload
+          setTimeout(reload, 7200);
+        
+          // need to close window
+          $('#addBookModal').modal('toggle');
         });
     });
 
+
 });
 
-// Returns a json of a book to be added to the database
+// Returns a JSON of a book to be added to the database
 function getAddBookData(){
     let name = $('#name').val();
     let author = $('#author').val();
@@ -78,56 +83,48 @@ function getAddBookData(){
 
 }
 
+// TODO delete this function if not needed.
 function addBookHandler(){
     console.log("test");
     signIn();
 }
 
-function signIn(){
-
-
-function loadFirebaseDatabase(){
-    // Might need to get rid of this as datatable works well with ajax call
-    var db = firebase.database();
-    var ref = db.ref("books");
-    ref.on("value", function(snapshot) {
-        snapshot.forEach(function(childSnapshot) {
-        var childData = childSnapshot.val();
-        var id=childData.id;
-        console.log(childData);
-        // get if from the table Element
-        let tableData = `<tr>
-        <td>${childData.name}</td>
-        <td>${childData.author}</td>
-        <td>${childData.location}</td>
-        <td>${childData.borrowed}</td>
-        </tr>`
-        // load data into table;
-        console.log("appended data");
-        $("#booksData").append(tableData);
-        });
-    });
+// Returns an integer which should be a new key for the soon to be added book.
+// Make sure the books table is loaded before using this function.
+function getNewKey(){
+    let booksTable = $('#booksTable').DataTable();
+    return booksTable.data().length;
+    
 }
 
-var provider = new firebase.auth.GithubAuthProvider();
+// Given data, a JSON object representing a book, add it to the database.  
+function addBookToDatabase(data){
+    let db = firebase.database();
+    let ref = db.ref("books");
+    let newBookRef = ref.child(getNewKey());
+    newBookRef.set(data);
+}
 
-firebase.auth().signInWithPopup(provider).then(function(result) {
-    // This gives you a GitHub Access Token. You can use it to access the GitHub API.
-    var token = result.credential.accessToken;
-    // The signed-in user info.
-    var user = result.user;
-    // load the pop-up form
+// Have a user to sign in. 
+function signIn(){
 
+    var provider = new firebase.auth.GithubAuthProvider();
 
-  }).catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // The email of the user's account used.
-    var email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
-    var credential = error.credential;
-    // ...
-  });
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+        // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+        var token = result.credential.accessToken;
+        // The signed-in user info.
+        var user = result.user;
+        // load the pop-up form
+    }).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        // ...
+    });
 }
 

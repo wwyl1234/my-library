@@ -83,12 +83,6 @@ function getAddBookData(){
 
 }
 
-// TODO delete this function if not needed.
-function addBookHandler(){
-    console.log("test");
-    signIn();
-}
-
 // Returns an integer which should be a new key for the soon to be added book.
 // Make sure the books table is loaded before using this function.
 function getNewKey(){
@@ -104,27 +98,3 @@ function addBookToDatabase(data){
     let newBookRef = ref.child(getNewKey());
     newBookRef.set(data);
 }
-
-// Have a user to sign in. 
-function signIn(){
-
-    var provider = new firebase.auth.GithubAuthProvider();
-
-    firebase.auth().signInWithPopup(provider).then(function(result) {
-        // This gives you a GitHub Access Token. You can use it to access the GitHub API.
-        var token = result.credential.accessToken;
-        // The signed-in user info.
-        var user = result.user;
-        // load the pop-up form
-    }).catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // The email of the user's account used.
-        var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
-        // ...
-    });
-}
-

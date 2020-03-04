@@ -81,21 +81,21 @@
                 <div class="modal-body">
                     <form id="addBookForm" method="post">
                         <label for="name">Name:</label><br>
-                        <input type="text" id="name" name="name"><br>
+                        <input type="text" id="name" name="name" required><br>
                         <label for="author">Author:</label><br>
-                        <input type="text" id="author" name="author"><br>
+                        <input type="text" id="author" name="author" required><br>
                         <label for="location">Location:</label><br>
-                        <input type="text" id="location" name="location" placeholder="MP"><br>
+                        <input type="text" id="location" name="location" required><br>
                         <!-- Get borrowed info using radio buttons  -->
                         <label for="borrowed">Is it Borrowed?</label><br>
-                        <input type="radio" id="borrowedSetTrue" name="borrowed" value="true">
+                        <input type="radio" id="borrowedSetTrue" name="borrowed" value="true" required>
                         <label for="borrowedSetTrue">Yes</label>
                         <input type="radio" id="borrowedSetFalse" name="borrowed" value="false">
                         <label for="borrowedSetFalse">No</label> <br>
 
                         <label for="isbn">ISBN13:</label><br>
-                        <input type="text" id="isbn" name="isbn"><br><br>
-                        <input type="submit">    
+                        <input type="text" id="isbn" name="isbn" required><br><br>
+                        <input type="submit" value="Send">    
                     </form>
                 </div>
                 <div class="modal-footer">

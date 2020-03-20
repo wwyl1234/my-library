@@ -27,8 +27,8 @@
         <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-firestore.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-database.js"></script>
 
+        <script src="scripts/isbn.js"></script>
         <script src="scripts/main.js"></script>
-        <script type="module" src="scripts/isbn.js"></script>
         <title>My library</title>
     </head>
 
@@ -95,9 +95,17 @@
                         <input type="radio" id="borrowedSetFalse" name="borrowed" value="false">
                         <label for="borrowedSetFalse">No</label> <br>
 
-                        <label for="isbn">ISBN13:</label><br>
+                        <!-- Handle the case where book has ISBN13 or ISBN10 -->
+                        <label for="query-isbn-13">Which ISBN do you have?</label>
+                        <br>
+                        <input type="radio" id="isbn13" name="query-isbn" value="true" required>
+                        <label for="isbn13">ISBN13</label>
+                        <input type="radio" id="isbn10" name="query-isbn" value="false">
+                        <label for="isbn10">ISBN10</label> <br>
+                        <label for="isbn">ISBN:</label><br>
                         <input type="text" id="isbn" name="isbn" required><br><br>
-                        <input type="submit" value="Send">    
+                        <input type="submit" value="Send">          
+                    
                     </form>
                 </div>
                 <div class="modal-footer">

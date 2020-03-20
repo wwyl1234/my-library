@@ -49,6 +49,11 @@ $(document).ready(function() {
         });
     });
 
+    $(function(){
+
+
+    });
+
 
 });
 
@@ -60,6 +65,7 @@ function getAddBookData(){
     let borrowed = null;
     let isbn = $('#isbn').val();
 
+    // Deal with the radio check box for borrowed property
     if ($('#borrowedSetTrue').is(':checked'))
     {
         borrowed = true;
@@ -70,6 +76,27 @@ function getAddBookData(){
     }
 
     if (borrowed == null){
+        return {};
+    }
+
+    // Deal with the radio check box for ISBN13 or ISBN10
+    if ($('#isbn10').is(':checked'))
+    {
+        if(!isValidIsbn10(isbn)){
+            console.warn('User gave an invalid ISBN10.');
+            return {};
+        }
+        isbn = convertIsbn10ToIsbn13(isbn);
+    }
+
+    if ($('#isbn13').is(':checked')){
+        if(!isValidIsbn13(isbn)){
+            console.warn('User gave an invalid ISBN13.');
+            return {};
+        }
+    }
+
+    if (isbn == null){
         return {};
     }
 

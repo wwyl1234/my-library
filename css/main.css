@@ -1,25 +1,27 @@
 
 
 #mainContainer {
-    background-color: #ffffff ;
+    background-color: #ffffff;
 }
 
 #topContainer{
-    padding: 2em;
-    background-color: #ffffff ;
+    padding: 4em 0 2em 2em;
+    background-color: #ffffff;
+    
 }
 
 #midContainer{
     padding: 2em;
-    background-color: #ffffff ;
+    background-color: #ffffff;
 }
 
 #bottomContainer{
     padding: 2em;
-    background-color: #ffffff ;
+    background-color: #ffffff;
     border-style: solid;
     border-width: 1em;
     border-color: #f49807;
+    box-shadow: 10px 10px 8px 10px #888888;
 }
 
 .tr {
@@ -31,7 +33,8 @@
 }
 
 #menu {
-    background-color: #f49807 ;
+    background-color: #f49807;
+    box-shadow: 10px 10px 8px 10px #888888;
 }
 
 #addBookButton {
@@ -39,5 +42,14 @@
 }
 
 .navbar-brand {
-    color: #140d00 ;
+    color: #140d00;
+}
+
+/* Add style to the form */
+#name {
+    width: 80%;
+}
+
+#author{
+    width: 80%;
 }

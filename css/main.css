@@ -1,5 +1,7 @@
+/* The stylesheet for the app */
 
-
+/* ===================================================== */
+/* Style the containers */
 #mainContainer {
     background-color: #ffffff;
 }
@@ -24,6 +26,8 @@
     box-shadow: 10px 10px 8px 10px #888888;
 }
 
+/* ===================================================== */
+/* Style the table */
 .tr {
     text-align: left;
 }
@@ -31,6 +35,9 @@
 .td {
     text-align: left;
 }
+
+/* ===================================================== */
+/* Style the menu */
 
 #menu {
     background-color: #f49807;
@@ -43,8 +50,11 @@
 
 .navbar-brand {
     color: #140d00;
+    font-family: 'Libre Barcode 39 Text', cursive;
+    font-size: 4em;
 }
 
+/* ===================================================== */
 /* Add style to the form */
 #name {
     width: 80%;

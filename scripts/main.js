@@ -1,3 +1,5 @@
+// Here lies the main functions to load the Firebase database and add new book
+
 // Your web app's Firebase configuration
 const FIREBASECONFIG = {
     apiKey: "AIzaSyAD4AQ7r8JkjnI3mrsvMvqhe8OE5XFAXR0",
@@ -48,13 +50,6 @@ $(document).ready(function() {
           $('#addBookModal').modal('toggle');
         });
     });
-
-    $(function(){
-
-
-    });
-
-
 });
 
 // Returns a JSON of a book to be added to the database

@@ -1,6 +1,9 @@
+// Here lies tests for isbn.js
+
 //var chai = require('chai');
 var assert = chai.assert;
 
+/* Tests for convertIsbn10ToIsbn13 function */
 describe('convertIsbn10ToIsbn13', function() {
   it('should convert a valid ISBN10 to ISBN13', function() {
     assert.equal("9781541698963", convertIsbn10ToIsbn13("1541698967"));
@@ -18,7 +21,7 @@ describe('convertIsbn10ToIsbn13', function() {
   });
 });
 
-
+/* Tests for isValidIsbn10 function */
 describe('isValidIsbn10', function() {
   it('should return true if given a valid ISBN10', function() {
     assert.equal(true, isValidIsbn10("0306406152"));
@@ -46,7 +49,7 @@ describe('isValidIsbn10', function() {
 
 });
 
-
+/* Tests for isValidIsbn13 function */
 describe('isValidIsbn13', function() {
   it('should return true if given a valid ISBN13', function() {
     assert.equal(true, isValidIsbn13("9781541698963"));

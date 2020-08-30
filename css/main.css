@@ -54,6 +54,21 @@
     font-size: 4em;
 }
 
+/* Style the pagination button that is not active */
+.pagination > li > a, .pagination > li > span{
+    /* Overriding datatables style */
+    color:orange !important
+}
+
+/* Style the pagination button that is active */
+.pagination > li.active > a, .pagination > li.active > span{
+    /* Overriding datatables style */
+    background-color: orange !important;
+    border: 1px solid orange !important;
+    color: black !important;
+    font-weight: bold !important;
+}
+
 /* ===================================================== */
 /* Add style to the form */
 #name {

@@ -28,8 +28,8 @@ $(document).ready(function() {
         "columns": [
             { data : "name" },
             { data : "author" },
-            { data : "location" },
-            { data : "borrowed" },
+            { data : "location", "visible": false,},
+            { data : "borrowed", "visible": false,},
             { data : "isbn" }
         ]
 
@@ -132,18 +132,44 @@ function getAddBookData(){
 
 }
 
-// Returns an integer which should be a new key for the soon to be added book.
-// Make sure the books table is loaded before using this function.
-function getNewKey(){
-    let booksTable = $('#booksTable').DataTable();
-    return booksTable.data().length;
-    
+// Returns promise containing an integer which should be a new key for the soon to be added book.
+async function getNewKey(){
+    let db = firebase.database();
+    let ref = db.ref("books");
+    let result = await ref.once("value")
+        .then ( snap  => {
+            return newKey = snap.numChildren();
+        })
+        .catch( error => {
+            console.log(error);
+        })
+    return result;
 }
 
 // Given data, a JSON object representing a book, add it to the database.  
 function addBookToDatabase(data){
     let db = firebase.database();
     let ref = db.ref("books");
-    let newBookRef = ref.child(getNewKey());
-    newBookRef.set(data);
+    getNewKey().then(result  => {
+        let newBookRef = ref.child(result);
+        newBookRef.set(data);
+   })
+}
+
+
+// Given the isbn in str format, return the promise containing the book object.
+async function getBookObj(isbn){
+    let db = firebase.database();
+    let ref = db.ref("books");
+    let result = await ref.orderByChild('isbn').equalTo(isbn).once("value")
+        .then (snap  => {
+            let obj = snap.val()
+            console.log(obj)
+            console.log(Object.keys(obj)[0])
+            return snap.val();
+        })
+        .catch( error => {
+            console.log(error);
+        })
+    return result;
 }

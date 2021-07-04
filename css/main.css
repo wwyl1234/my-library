@@ -44,8 +44,13 @@
     box-shadow: 10px 10px 8px 10px #888888;
 }
 
+#loginButton {
+    background-color: purple;
+}
+
 #addBookButton {
     background-color: #000000;
+    visibility: hidden;
 }
 
 .navbar-brand {
@@ -77,4 +82,9 @@
 
 #author{
     width: 80%;
+}
+
+/* Add extra space between the send button and the password input */
+#loginSubmit{
+    margin-top: 1em;
 }

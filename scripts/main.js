@@ -19,7 +19,7 @@ $(document).ready(function() {
 
     // Load datatabase into table.
     // Data from https://my-library-bd9da.firebaseio.com/books/.json is an array of objects.
-    $('#booksTable').DataTable( {
+    var table = $('#booksTable').DataTable( {
         "ajax": {
             "url": 'https://my-library-bd9da.firebaseio.com/books/.json',
             "method": "GET",
@@ -32,7 +32,11 @@ $(document).ready(function() {
             { data : "borrowed" },
             { data : "isbn" }
         ]
+
     } );
+
+    // This can be use to filter the table and  filter by borrowed is false 
+    table.column(3).search('false', true, false).draw();
     
     // Add book to database, when user click submit button on the form.
     $(function(){
@@ -50,6 +54,29 @@ $(document).ready(function() {
           $('#addBookModal').modal('toggle');
         });
     });
+
+    // Login, when user click submit button on the form.
+    $(function(){
+        $('#loginForm').on('submit', function(e){
+            e.preventDefault();
+            let email = $('#email').val();
+            let password = $('#password').val();
+            firebase.auth().signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Signed in
+                    $('#addBookButton').css("visibility", "visible");
+                })
+                .catch((error) => {
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    console.log(errorCode, errorMessage);
+                });
+          
+          // need to close window
+          $('#loginModal').modal('toggle');
+        });
+    });
+
 });
 
 // Returns a JSON of a book to be added to the database

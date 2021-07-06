@@ -65,6 +65,7 @@ $(document).ready(function() {
                 .then((userCredential) => {
                     // Signed in
                     $('#addBookButton').css("visibility", "visible");
+                    $('#updateBookButton').css("visibility", "visible");
                 })
                 .catch((error) => {
                     var errorCode = error.code;
@@ -74,6 +75,43 @@ $(document).ready(function() {
           
           // need to close window
           $('#loginModal').modal('toggle');
+        });
+    });
+
+    // Get book data , when user click on Get Data button in the update book modal dialog
+    $('#getBookDataButton').click(function(){
+        console.log('pressed');
+        let isbn = $('#updateIsbn').val();
+        if (isValidIsbn13(isbn)){
+            getBookObj(isbn)
+                .then(result => {
+                    console.log(result);
+                    let element = $("#bookData");
+                    element.html(JSON.stringify(result[Object.keys(result)[0]], undefined, 2));
+                })
+                .catch(error => {
+                    console.warn('ISBN not in database!');
+                });
+        } else {
+            console.warn("Invalid isbn13")
+        }
+    });
+    
+    // Update book, when user click submit button on the form.
+    $(function(){
+        $('#updateBookForm').on('submit', function(e){
+            e.preventDefault();
+            let isbn = $('#updateIsbn').val();
+            let property = $('#property').val();
+            let value = $('#updateValue').val();
+            updateBook(isbn, property, value)
+
+            // need to reload table with a timeout of 2 minutes
+            let reload = $('#booksTable').DataTable().ajax.reload
+            setTimeout(reload, 7200);
+          
+          // need to close window
+            $('#updateBookModal').modal('toggle');
         });
     });
 
@@ -159,17 +197,44 @@ function addBookToDatabase(data){
 
 // Given the isbn in str format, return the promise containing the book object.
 async function getBookObj(isbn){
+    if(!isValidIsbn13(isbn)){
+        throw 'User gave an invalid ISBN13.';
+    }
     let db = firebase.database();
     let ref = db.ref("books");
+
+    
     let result = await ref.orderByChild('isbn').equalTo(isbn).once("value")
         .then (snap  => {
             let obj = snap.val()
             console.log(obj)
             console.log(Object.keys(obj)[0])
+            console.log(obj[Object.keys(obj)[0]])
             return snap.val();
         })
-        .catch( error => {
-            console.log(error);
+        .catch(error => {
+            console.warn('ISBN not in database!')
         })
     return result;
+    
+}
+
+// Update book with given existing isbn in database, property and value
+function updateBook(isbn, property, value){
+    let db = firebase.database();
+    let ref = db.ref("books");
+    getBookObj(isbn)
+        .then(result => {
+            let bookId = Object.keys(result)[0]
+            console.log(bookId)
+            let data = result[bookId];
+            data[property] = value
+            console.log(data)
+            let bookRef = ref.child(parseInt(bookId));
+            console.log(bookRef)
+            bookRef.set(data);
+        })
+        .catch(error => {
+            console.warn('ISBN is not in database!');
+        })
 }

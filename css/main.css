@@ -53,6 +53,10 @@
     visibility: hidden;
 }
 
+#updateBookButton {
+    visibility: hidden;
+}
+
 .navbar-brand {
     color: #140d00;
     font-family: 'Libre Barcode 39 Text', cursive;
@@ -86,5 +90,15 @@
 
 /* Add extra space between the send button and the password input */
 #loginSubmit{
+    margin-top: 1em;
+}
+
+/* Add extra space between the send button and the password input */
+#updateSubmit{
+    margin-top: 1em;
+}
+
+/* Add extra space between the Get Data button and the ISBN input */
+#getBookDataButton{
     margin-top: 1em;
 }

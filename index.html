@@ -66,6 +66,7 @@
                                     <th data-field="location">Location</th>
                                     <th data-field="borrowed">Borrowed?</th>
                                     <th data-field="isbn">ISBN</th>
+                                    <th data-field="needAuth">Need Authorization</th>
                                 </tr>
                             </thead>
                             <tbody id="booksData">
@@ -162,6 +163,13 @@
                                     <label for="borrowedSetTrue">Yes</label>
                                     <input type="radio" id="borrowedSetFalse" name="borrowed" value="false">
                                     <label for="borrowedSetFalse">No</label> <br>
+
+                                    <!-- Get needAuth info using radio buttons  -->
+                                    <label for="needAuth">Does this book need authorization?</label><br>
+                                    <input type="radio" id="needAuthSetTrue" name="needAuth" value="true" required>
+                                    <label for="needAuthSetTrue">Yes</label>
+                                    <input type="radio" id="needAuthSetFalse" name="needAuth" value="false">
+                                    <label for="needAuthSetFalse">No</label> <br>
 
                                     <!-- Handle the case where book has ISBN13 or ISBN10 -->
                                     <label for="query-isbn-13">Which ISBN do you have?</label>

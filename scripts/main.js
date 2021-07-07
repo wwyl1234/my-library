@@ -30,13 +30,16 @@ $(document).ready(function() {
             { data : "author" },
             { data : "location", "visible": false,},
             { data : "borrowed", "visible": false,},
-            { data : "isbn" }
+            { data : "isbn" },
+            { data : "needAuth", "visible": false }
         ]
 
     } );
 
     // This can be use to filter the table and  filter by borrowed is false 
     table.column(3).search('false', true, false).draw();
+    // This can be use to filter the table and  filter by needAuth is false 
+    table.column(5).search('false', true, false).draw();
     
     // Add book to database, when user click submit button on the form.
     $(function(){
@@ -66,6 +69,11 @@ $(document).ready(function() {
                     // Signed in
                     $('#addBookButton').css("visibility", "visible");
                     $('#updateBookButton').css("visibility", "visible");
+                    
+                    // Undo the filters for unauthorized users
+                    table.search('')
+                        .columns().search('')
+                        .draw();
                 })
                 .catch((error) => {
                     var errorCode = error.code;
@@ -121,9 +129,10 @@ $(document).ready(function() {
 function getAddBookData(){
     let name = $('#name').val();
     let author = $('#author').val();
-    let location = $('#location').val()
+    let location = $('#location').val();
     let borrowed = null;
     let isbn = $('#isbn').val();
+    let needAuth = null; 
 
     // Deal with the radio check box for borrowed property
     if ($('#borrowedSetTrue').is(':checked'))
@@ -135,7 +144,18 @@ function getAddBookData(){
         borrowed = false;
     }
 
-    if (borrowed == null){
+    // Deal with the radio check box for needAuth property
+    if ($('#needAuthSetTrue').is(':checked'))
+    {
+        needAuth = true;
+    }
+
+    if ($('#needAuthSetFalse').is(':checked')){
+        needAuth = false;
+    }
+
+
+    if (borrowed == null || needAuth == null){
         return {};
     }
 
@@ -166,6 +186,7 @@ function getAddBookData(){
         "location" : `${location}`,
         "borrowed" : `${borrowed}`,
         "isbn" : `${isbn}`,
+        "needAuth" : `${needAuth}`
     }
 
 }

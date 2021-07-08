@@ -57,6 +57,11 @@
     visibility: hidden;
 }
 
+#getBackupButton {
+    background-color: #0000FF;
+    visibility: hidden;
+}
+
 .navbar-brand {
     color: #140d00;
     font-family: 'Libre Barcode 39 Text', cursive;
